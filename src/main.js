@@ -1,31 +1,30 @@
 import Vue from 'vue';
 import './style.scss';
 
-import genres from './util/genres.js';
+import MovieList from './components/MovieList.vue'
 
 new Vue(
     {
         el: '#app',
-        method: {
+        data: {
+            genre: [],
+            time: []
+        },
+            
+        methods: {
             checkFilter(category, title, checked) {
-                console.log(category, title, checked);
+                if (checked) {
+                    this[category].push(title);
+                } else {
+                    let index = this[category].indexOf(title);
+                    if (index > -1) {
+                        this[category].splice(index, 1);
+                    }
+                }
             }
         },
         components: {
-            'movie-list': {
-                template: `<div id="movie-list">
-								<div v-for="movie in movies"class="movie">{{ movie.title }}</div>
-						</div>`,
-                data() {
-                    return {
-                        movies: [
-                            { title: 'Pulp Fiction' },
-                            { title: 'Home Alone' },
-                            { title: 'Avengers' }
-                        ]
-                    }
-                }
-            },
+            MovieList,    
             'movie-filter': {
                 data() {
                     return {
