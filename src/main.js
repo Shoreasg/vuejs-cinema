@@ -31,6 +31,7 @@ new Vue(
 							<h2>Filter results</h2>
                             <div class="filter-group">
                             <check-filter v-for="genre in genres" title="My title"></check-filter>
+                            </div>
                             </div>`,
                 components: {
                     'check-filter': {
